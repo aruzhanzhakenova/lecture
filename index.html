@@ -1,0 +1,848 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7–9-сыныптарда геометрияны оқыту әдістемесі</title>
+
+<style>
+:root {
+  --primary: #344b8e;
+  --secondary: #667eea;
+  --light: #f2f5fc;
+  --dark: #202b45;
+  --white: #ffffff;
+  --green: #23845b;
+  --red: #bd4545;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.7;
+}
+
+header {
+  background: linear-gradient(135deg, #263b78, #7587d8);
+  color: white;
+  padding: 65px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.2;
+  max-width: 950px;
+  margin: auto;
+}
+
+header p {
+  margin-top: 18px;
+  font-size: 18px;
+}
+
+.header-info {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.header-info span {
+  background: rgba(255,255,255,.16);
+  padding: 8px 17px;
+  border-radius: 25px;
+}
+
+nav {
+  background: #202e59;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 13px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 13px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+nav a:hover { background: #5268ad; }
+
+.container {
+  max-width: 1120px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+.section {
+  margin: 35px 0;
+  scroll-margin-top: 85px;
+}
+
+.section-title {
+  color: var(--primary);
+  font-size: 27px;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #c5cef2;
+  padding-bottom: 10px;
+}
+
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 15px;
+  margin: 17px 0;
+  box-shadow: 0 4px 15px rgba(30,50,100,.07);
+}
+
+.card h3 {
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 18px;
+}
+
+.info-card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  border-top: 4px solid var(--secondary);
+}
+
+.info-card h3 {
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.task-card {
+  background: white;
+  padding: 25px;
+  margin: 22px 0;
+  border-radius: 15px;
+  border-left: 5px solid var(--secondary);
+  box-shadow: 0 4px 15px rgba(30,50,100,.07);
+}
+
+.task-card h3 {
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.task-card li {
+  margin: 8px 0 8px 22px;
+}
+
+.task-card details {
+  margin-top: 16px;
+  padding: 13px;
+  background: #f0f3fc;
+  border-radius: 9px;
+}
+
+summary {
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.tag {
+  display: inline-block;
+  background: #e7ebff;
+  color: #344b8e;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 11px 19px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 12px;
+}
+
+button:hover { background: #5268ad; }
+
+button:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
+.option {
+  display: block;
+  background: #f0f3fc;
+  padding: 11px;
+  margin: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.option:hover { background: #e1e7fc; }
+
+.feedback {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.correct { color: var(--green); }
+.incorrect { color: var(--red); }
+
+.result {
+  background: #e9edff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 18px;
+  display: none;
+}
+
+.game-question {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
+
+.links a {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  background: #202e59;
+  color: white;
+  padding: 30px 15px;
+  margin-top: 40px;
+}
+
+@media(max-width:600px) {
+  header { padding: 45px 15px; }
+  nav { position: relative; }
+  .container { padding: 20px 14px; }
+  .card,.task-card { padding: 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>7–9-сыныптарда геометрияны оқыту әдістемесі</h1>
+  <p>«Математиканы оқыту әдістемесі» пәні бойынша практикалық дәріс</p>
+  <div class="header-info">
+    <span>3-курс студенттеріне арналған</span>
+    <span>Дәріс ұзақтығы: 50 минут</span>
+    <span>Практикалық бағыт</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#goal">Мақсат</a>
+  <a href="#content">Сыныптар мазмұны</a>
+  <a href="#methods">Әдістер</a>
+  <a href="#tasks">Күрделі тапсырмалар</a>
+  <a href="#quiz">Тест</a>
+  <a href="#game">Ойын</a>
+  <a href="#platforms">Платформалар</a>
+  <a href="#reflection">Рефлексия</a>
+</nav>
+
+<main class="container">
+
+<section class="section" id="goal">
+  <h2 class="section-title">Дәрістің мақсаты мен міндеттері</h2>
+
+  <div class="card">
+    <h3>Дәрістің мақсаты</h3>
+    <p>
+      Болашақ математика мұғалімдерінің 7–9-сыныптарда геометрияны
+      оқыту үдерісін жобалау, тиімді әдістерді таңдау, оқушылардың
+      танымдық қиындықтарын анықтау және оқу жетістіктерін бағалау
+      дағдыларын қалыптастыру.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="info-card">
+      <h3>Әдістемелік құзырет</h3>
+      <p>Геометрияны оқыту әдістерін оқу мақсаттарына сәйкес таңдау.</p>
+    </div>
+    <div class="info-card">
+      <h3>Зерттеушілік құзырет</h3>
+      <p>Оқушының біліміндегі қиындықтарды анықтап, шешім ұсыну.</p>
+    </div>
+    <div class="info-card">
+      <h3>Жобалау құзыреті</h3>
+      <p>Сабақ фрагменттерін және тапсырмалар жүйесін әзірлеу.</p>
+    </div>
+    <div class="info-card">
+      <h3>Бағалау құзыреті</h3>
+      <p>Критерийлер, дескрипторлар және кері байланыс әзірлеу.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="content">
+  <h2 class="section-title">7–9-сыныптардағы геометрия мазмұнын әдістемелік талдау</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>7-сынып</h3>
+      <p><b>Негізгі мазмұны:</b></p>
+      <ul>
+        <li>Геометриялық фигуралар және олардың қасиеттері;</li>
+        <li>Бұрыштар және түзулер;</li>
+        <li>Үшбұрыштар, олардың теңдік белгілері;</li>
+        <li>Үшбұрыш бұрыштарының қосындысы;</li>
+        <li>Геометриялық салулар.</li>
+      </ul>
+      <p><b>Әдістемелік басымдық:</b> көрнекілік, бақылау, тәжірибе және алғашқы дәлелдеу дағдыларын қалыптастыру.</p>
+    </div>
+
+    <div class="card">
+      <h3>8-сынып</h3>
+      <p><b>Негізгі мазмұны:</b></p>
+      <ul>
+        <li>Төртбұрыштар және олардың қасиеттері;</li>
+        <li>Параллелограмм, ромб, тіктөртбұрыш, шаршы;</li>
+        <li>Пифагор теоремасы;</li>
+        <li>Ұқсас үшбұрыштар;</li>
+        <li>Аудан және геометриялық түрлендірулер.</li>
+      </ul>
+      <p><b>Әдістемелік басымдық:</b> логикалық байланыстарды ашу, теоремаларды дәлелдеу және есептерді түрлендіру.</p>
+    </div>
+
+    <div class="card">
+      <h3>9-сынып</h3>
+      <p><b>Негізгі мазмұны:</b></p>
+      <ul>
+        <li>Шеңбер және дөңгелек;</li>
+        <li>Шеңбердегі бұрыштар;</li>
+        <li>Векторлар және координаталар;</li>
+        <li>Тригонометриялық қатынастар;</li>
+        <li>Жазықтықтағы геометриялық есептер.</li>
+      </ul>
+      <p><b>Әдістемелік басымдық:</b> абстрактілі ойлау, математикалық модельдеу және бірнеше шешу тәсілін салыстыру.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="methods">
+  <h2 class="section-title">Геометрияны оқытудың әдістемелік тәсілдері</h2>
+
+  <div class="grid">
+    <div class="info-card">
+      <h3>Проблемалық оқыту</h3>
+      <p>Оқушыға дайын ережені бермей, проблемалық жағдаят арқылы заңдылықты өздігінен ашуға мүмкіндік беру.</p>
+    </div>
+    <div class="info-card">
+      <h3>Зерттеушілік оқыту</h3>
+      <p>Гипотеза ұсыну, сызба құру, өлшеу, салыстыру және қорытынды жасау.</p>
+    </div>
+    <div class="info-card">
+      <h3>Саралап оқыту</h3>
+      <p>Оқушылардың дайындық деңгейіне сәйкес күрделілігі әртүрлі тапсырмалар ұсыну.</p>
+    </div>
+    <div class="info-card">
+      <h3>Жобалық оқыту</h3>
+      <p>Геометриялық білімді практикалық нысандарды модельдеу және зерттеу кезінде қолдану.</p>
+    </div>
+    <div class="info-card">
+      <h3>Цифрлық оқыту</h3>
+      <p>Динамикалық геометриялық сызбалар арқылы қасиеттерді зерттеу.</p>
+    </div>
+    <div class="info-card">
+      <h3>Қалыптастырушы бағалау</h3>
+      <p>Оқу барысындағы қиындықтарды анықтап, дер кезінде кері байланыс беру.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tasks">
+  <h2 class="section-title">Күрделі әдістемелік тапсырмалар</h2>
+  <p>Барлық тапсырмалар 3-курс студенттерінің кәсіби-әдістемелік құзыреттерін дамытуға арналған.</p>
+
+  <div class="task-card">
+    <span class="tag">1-тапсырма · Әдістемелік диагностика</span>
+    <h3>Оқушының геометриялық дәлелдеудегі қиындықтарын талдау</h3>
+    <p><b>Жағдаят:</b> 7-сынып оқушысы үшбұрыштың ішкі бұрыштарының қосындысы 180° екенін біледі, бірақ теореманы дәлелдей алмайды. Ол сызбаға қарап, «солай көрініп тұр» деген жауап береді.</p>
+    <ol>
+      <li>Оқушының қатесін және оның ықтимал себептерін анықтаңыз.</li>
+      <li>Қандай алдыңғы білім мен дағдылар жеткіліксіз қалыптасқанын көрсетіңіз.</li>
+      <li>Проблемалық оқытуға негізделген әдістемелік шешім ұсыныңыз.</li>
+      <li>Оқушыны өздігінен дәлелдеуге жетелейтін 3 тапсырмадан тұратын жүйе жасаңыз.</li>
+      <li>Түсінуді тексеруге арналған диагностикалық сұрақтар құрастырыңыз.</li>
+    </ol>
+    <details>
+      <summary>Бағалау критерийлері</summary>
+      <p>Қатені талдау – 2 балл; әдісті негіздеу – 2 балл; тапсырмалар жүйесі – 3 балл; диагностика – 3 балл.</p>
+    </details>
+  </div>
+
+  <div class="task-card">
+    <span class="tag">2-тапсырма · Сабақты жобалау</span>
+    <h3>Пифагор теоремасын оқытудың сабақ фрагментін әзірлеу</h3>
+    <p><b>Сынып:</b> 8-сынып. <b>Уақыты:</b> 15 минут.</p>
+    <p><b>Мәселе:</b> Оқушылар формуланы қолданады, бірақ теореманың мағынасын және дәлелдеу логикасын түсіндіре алмайды.</p>
+    <ol>
+      <li>Оқу мақсатын және өлшенетін күтілетін нәтижелерді анықтаңыз.</li>
+      <li>Алдыңғы білімді анықтайтын диагностикалық тапсырма құрастырыңыз.</li>
+      <li>Теореманы ашуға арналған проблемалық жағдаят ұсыныңыз.</li>
+      <li>Көрнекі немесе цифрлық құралды таңдап, оның рөлін негіздеңіз.</li>
+      <li>Мұғалім мен оқушы әрекеттерін кезең-кезеңімен жазыңыз.</li>
+      <li>Қалыптастырушы бағалау критерийлері мен дескрипторларын жасаңыз.</li>
+    </ol>
+    <details>
+      <summary>Қосымша талап</summary>
+      <p>Сабақ фрагментінде оқушының белсенді зерттеу әрекеті болуы керек. Дайын формуланы жай ғана түсіндіру жеткіліксіз.</p>
+    </details>
+  </div>
+
+  <div class="task-card">
+    <span class="tag">3-тапсырма · Дәлелдеуді оқыту</span>
+    <h3>Төртбұрыш қасиеттерін оқытудағы әдістемелік қателер</h3>
+    <p>Мұғалім параллелограмм диагональдарының бірін-бірі қақ бөлетінін дайын сызба арқылы көрсетіп, қасиетті дәлелдеусіз қабылдауды ұсынады.</p>
+    <ol>
+      <li>Мұғалім әрекетінің дидактикалық кемшіліктерін анықтаңыз.</li>
+      <li>Көрнекілік пен логикалық дәлелдеудің айырмашылығын талдаңыз.</li>
+      <li>Оқушылар қасиетті өздері ашатындай зерттеу тапсырмасын жасаңыз.</li>
+      <li>Қасиетті дәлелдеудің логикалық кезеңдерін көрсетіңіз.</li>
+      <li>Дәлелдеудің сапасын бағалайтын төрт критерий құрастырыңыз.</li>
+    </ol>
+  </div>
+
+  <div class="task-card">
+    <span class="tag">4-тапсырма · Саралап оқыту</span>
+    <h3>Шеңбер ұзындығы мен дөңгелек ауданын оқытудағы үш деңгейлі тапсырмалар</h3>
+    <p><b>Сынып:</b> 9-сынып.</p>
+    <ol>
+      <li>Бір оқу мақсатына негізделген А, В, С деңгейіндегі тапсырмалар әзірлеңіз.</li>
+      <li>А деңгейінде негізгі формулаларды қолдануды тексеріңіз.</li>
+      <li>В деңгейінде практикалық жағдаятты математикалық модельдеуді талап етіңіз.</li>
+      <li>С деңгейінде күрделі проблемалық есепті бірнеше тәсілмен шешуді ұсыныңыз.</li>
+      <li>Әр деңгейге бағалау критерийлері мен дескрипторларын жасаңыз.</li>
+      <li>Қиындық көрген оқушыларға қолдау стратегиясын көрсетіңіз.</li>
+    </ol>
+  </div>
+
+  <div class="task-card">
+    <span class="tag">5-тапсырма · Цифрлық педагогика</span>
+    <h3>GeoGebra арқылы зерттеушілік тапсырма әзірлеу</h3>
+    <p>7–9-сыныптардан бір геометриялық тақырып таңдаңыз.</p>
+    <ol>
+      <li>Цифрлық зерттеу мақсатын анықтаңыз.</li>
+      <li>Динамикалық сызба құрудың алгоритмін сипаттаңыз.</li>
+      <li>Оқушы өзгермелі параметрлер арқылы қандай заңдылықты ашатынын көрсетіңіз.</li>
+      <li>Кемінде үш зерттеу сұрағын құрастырыңыз.</li>
+      <li>Цифрлық және дәстүрлі оқыту тәсілдерін салыстырыңыз.</li>
+      <li>Зерттеу нәтижесін бағалау құралын әзірлеңіз.</li>
+    </ol>
+  </div>
+
+  <div class="task-card">
+    <span class="tag">6-тапсырма · Педагогикалық зерттеу</span>
+    <h3>Проблемалық оқытудың тиімділігін зерттеу жобасы</h3>
+    <ol>
+      <li>Зерттеу тақырыбын, мақсатын және гипотезасын жазыңыз.</li>
+      <li>Зерттеу нысаны мен пәнін анықтаңыз.</li>
+      <li>Эксперименттік және бақылау топтарының жұмысын сипаттаңыз.</li>
+      <li>Бастапқы білімді анықтайтын диагностикалық тест құрастырыңыз.</li>
+      <li>Проблемалық оқытуға негізделген сабақтар жүйесін ұсыныңыз.</li>
+      <li>Нәтижелерді салыстыруға арналған өлшемдерді анықтаңыз.</li>
+      <li>Алынған деректерді талдау тәсілін негіздеңіз.</li>
+    </ol>
+  </div>
+
+  <div class="task-card">
+    <span class="tag">7-тапсырма · Оқулық сараптамасы</span>
+    <h3>Геометрия оқулығының әдістемелік сапасын бағалау</h3>
+    <ol>
+      <li>7–9-сынып оқулығынан бір тақырып таңдаңыз.</li>
+      <li>Оқу бағдарламасындағы тақырыптың орнын анықтаңыз.</li>
+      <li>Ұғымдар мен теоремалардың берілу ретін талдаңыз.</li>
+      <li>Есептерді танымдық күрделілік деңгейі бойынша жіктеңіз.</li>
+      <li>Логикалық және кеңістіктік ойлауды дамыту мүмкіндігін бағалаңыз.</li>
+      <li>Оқулықтағы тапсырмаларды жетілдіруге үш ұсыныс жасаңыз.</li>
+    </ol>
+  </div>
+
+  <div class="task-card">
+    <span class="tag">8-тапсырма · Шығармашылық жоба</span>
+    <h3>Авторлық әдістемелік өнім әзірлеу</h3>
+    <p>7–9-сыныптардың бір геометриялық тақырыбына арналған авторлық сабақ материалын жасаңыз.</p>
+    <ol>
+      <li>Оқу мақсаты мен күтілетін нәтижелер;</li>
+      <li>Проблемалық жағдаят;</li>
+      <li>Кемінде бес тапсырмадан тұратын жүйе;</li>
+      <li>Зерттеушілік немесе практикалық жұмыс;</li>
+      <li>Қалыптастырушы бағалау және дескрипторлар;</li>
+      <li>Рефлексия және өзін-өзі бағалау;</li>
+      <li>Әдістемелік шешімдердің ғылыми-педагогикалық негіздемесі.</li>
+    </ol>
+    <details>
+      <summary>Қорғау талабы</summary>
+      <p>Студент авторлық өнімді 5–7 минут ішінде таныстырып, оның тиімділігін дәлелдейді.</p>
+    </details>
+  </div>
+</section>
+
+<section class="section" id="quiz">
+  <h2 class="section-title">Интерактивті кәсіби тест</h2>
+  <p>Әр сұраққа бір дұрыс жауап таңдаңыз. Тест аяқталғаннан кейін нәтиже автоматты түрде есептеледі.</p>
+
+  <div class="card" id="quizBox">
+    <div id="questions"></div>
+    <button id="checkQuiz" onclick="checkQuiz()">Нәтижені тексеру</button>
+    <div class="result" id="quizResult"></div>
+    <button id="resetQuiz" onclick="resetQuiz()" style="display:none">Қайта орындау</button>
+  </div>
+</section>
+
+<section class="section" id="game">
+  <h2 class="section-title">Педагогикалық жағдаяттар ойыны</h2>
+  <p>Жағдаятты оқып, ең тиімді әдістемелік шешімді таңдаңыз.</p>
+
+  <div class="card">
+    <h3 id="gameTitle"></h3>
+    <p id="gameText"></p>
+    <div id="gameOptions"></div>
+    <p class="feedback" id="gameFeedback"></p>
+    <button onclick="nextGame()">Келесі жағдаят</button>
+    <p id="gameProgress"></p>
+  </div>
+
+  <div class="card">
+    <h3>Әдіс пен дидактикалық мақсатты сәйкестендіру</h3>
+    <p>Төмендегі әдіске сәйкес келетін дидактикалық мақсатты таңдаңыз.</p>
+    <label>Проблемалық оқыту</label>
+    <select id="match1">
+      <option value="">Таңдаңыз</option>
+      <option value="a">Дайын білімді қайталау</option>
+      <option value="b">Мәселені шешу арқылы жаңа білімді ашу</option>
+      <option value="c">Оқушының қатесін ғана тіркеу</option>
+    </select>
+    <br>
+    <label>Зерттеушілік оқыту</label>
+    <select id="match2">
+      <option value="">Таңдаңыз</option>
+      <option value="a">Гипотеза ұсыну және тексеру</option>
+      <option value="b">Дайын алгоритмді көшіру</option>
+      <option value="c">Тек формуланы жаттау</option>
+    </select>
+    <br>
+    <label>Саралап оқыту</label>
+    <select id="match3">
+      <option value="">Таңдаңыз</option>
+      <option value="a">Барлық оқушыға бірдей күрделіліктегі тапсырма беру</option>
+      <option value="b">Тапсырмаларды кездейсоқ таңдау</option>
+      <option value="c">Оқушылардың дайындық деңгейіне сай тапсырма беру</option>
+    </select>
+    <br>
+    <button onclick="checkMatching()">Жауаптарды тексеру</button>
+    <p id="matchResult" class="feedback"></p>
+  </div>
+</section>
+
+<section class="section" id="platforms">
+  <h2 class="section-title">Интерактивті білім беру платформалары</h2>
+  <div class="grid">
+    <div class="info-card">
+      <h3>GeoGebra</h3>
+      <p>Динамикалық геометриялық модельдер құру, фигуралардың қасиеттерін зерттеу.</p>
+      <a href="https://www.geogebra.org/" target="_blank" rel="noopener">Платформаға өту</a>
+    </div>
+    <div class="info-card">
+      <h3>Wordwall</h3>
+      <p>Интерактивті тесттер, сәйкестендіру және оқу ойындарын әзірлеу.</p>
+      <a href="https://wordwall.net/" target="_blank" rel="noopener">Платформаға өту</a>
+    </div>
+    <div class="info-card">
+      <h3>LearningApps</h3>
+      <p>Сәйкестендіру, топтастыру және интерактивті жаттығулар жасау.</p>
+      <a href="https://learningapps.org/" target="_blank" rel="noopener">Платформаға өту</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reflection">
+  <h2 class="section-title">Рефлексия және қорытынды</h2>
+
+  <div class="card">
+    <h3>Өзіңізді бағалаңыз</h3>
+    <p>Дәріс соңында келесі сұрақтарға жауап беріңіз:</p>
+    <ol>
+      <li>Геометрияны оқытуда қандай әдісті тиімді деп санайсыз? Неліктен?</li>
+      <li>Оқушының дәлелдеу дағдысын қалай қалыптастырасыз?</li>
+      <li>Цифрлық құралды қолданудың қандай шектеулері бар?</li>
+      <li>Бүгінгі дәрістен алған ең маңызды кәсіби дағдыңыз қандай?</li>
+    </ol>
+    <textarea id="reflectionText" rows="5" style="width:100%;padding:12px;margin-top:12px;border:1px solid #bbb;border-radius:8px" placeholder="Өз ойыңызды жазыңыз..."></textarea>
+    <br>
+    <button onclick="saveReflection()">Жауапты сақтау</button>
+    <p id="reflectionMessage"></p>
+  </div>
+
+  <div class="card">
+    <h3>Қорытынды</h3>
+    <p>
+      Геометрияны тиімді оқыту тек теоремалар мен формулаларды түсіндірумен
+      шектелмейді. Мұғалім оқушының логикалық және кеңістіктік ойлауын,
+      дәлелдеу мәдениетін, зерттеушілік қабілетін және математикалық
+      сауаттылығын жүйелі түрде дамытуы қажет.
+    </p>
+    <p>
+      Болашақ мұғалімнің кәсіби дайындығы оқу мазмұнын түсінуімен қатар,
+      оны оқушының танымдық ерекшеліктеріне сай ұйымдастыра алуымен анықталады.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>«Математиканы оқыту әдістемесі» пәні</p>
+  <p>7–9-сыныптарда геометрияны оқыту әдістемесі</p>
+  <p>3-курс студенттеріне арналған оқу материалы</p>
+</footer>
+
+<script>
+const quizData = [
+ {
+  q:"1. Оқушы теореманы жатқа біледі, бірақ дәлелдей алмайды. Мұғалімнің ең тиімді әрекеті қандай?",
+  a:["Теореманы бірнеше рет жаттату","Алдыңғы білімді анықтап, дәлелдеуге жетелейтін зерттеу тапсырмасын беру","Дайын дәлелдеуді көшірту","Тақырыпты өзгертпей қайталау"],
+  c:1
+ },
+ {
+  q:"2. GeoGebra бағдарламасын геометрия сабағында қолданудың негізгі дидактикалық мүмкіндігі қандай?",
+  a:["Оқушы әрекетін толығымен алмастыру","Барлық есепті автоматты түрде шығару","Фигураларды динамикалық өзгертіп, қасиеттерді зерттеу","Тек дайын суреттер көрсету"],
+  c:2
+ },
+ {
+  q:"3. Саралап оқытудың негізгі қағидасы қандай?",
+  a:["Барлық оқушыға бірдей күрделі тапсырма беру","Оқушылардың ерекшеліктері мен дайындық деңгейін ескеру","Тек үлгерімі жоғары оқушылармен жұмыс істеу","Тапсырмаларды бағалаусыз орындау"],
+  c:1
+ },
+ {
+  q:"4. Қалыптастырушы бағалаудың негізгі мақсаты қандай?",
+  a:["Тек тоқсандық баға қою","Оқушыларды өзара салыстыру","Оқу үдерісінде кері байланыс беріп, ілгерілеуді қолдау","Оқушыны жазалау"],
+  c:2
+ },
+ {
+  q:"5. Проблемалық оқытудың маңызды ерекшелігі қандай?",
+  a:["Дайын ақпаратты қабылдау","Мәселе қою және оны шешу арқылы білімді меңгеру","Тек ережелерді жаттау","Мұғалімнің монологы"],
+  c:1
+ },
+ {
+  q:"6. Геометриялық дәлелдеуді бағалауда қай өлшем маңызды?",
+  a:["Сызбаның әдемілігі ғана","Жауаптың ұзындығы","Логикалық реттілік пен тұжырымдардың негізділігі","Жазу жылдамдығы"],
+  c:2
+ },
+ {
+  q:"7. Педагогикалық зерттеуде гипотезаның қызметі қандай?",
+  a:["Зерттеу нәтижесін алдын ала нақты факт ретінде жариялау","Тексеруді қажет ететін ғылыми болжам ұсыну","Оқулық мазмұнын қайталау","Бағалау балын белгілеу"],
+  c:1
+ },
+ {
+  q:"8. Сабақтың оқу мақсаты қандай болуы керек?",
+  a:["Өлшенетін және оқушы әрекеті арқылы байқалатын","Тек мұғалім әрекетін сипаттайтын","Жалпы және тексерілмейтін","Тақырып атауымен бірдей"],
+  c:0
+ }
+];
+
+function renderQuiz() {
+ const area = document.getElementById("questions");
+ area.innerHTML = "";
+ quizData.forEach((q,i) => {
+  let html = `<div class="game-question"><b>${q.q}</b>`;
+  q.a.forEach((a,j) => {
+   html += `<label class="option"><input type="radio" name="q${i}" value="${j}"> ${a}</label>`;
+  });
+  html += `</div>`;
+  area.innerHTML += html;
+ });
+}
+renderQuiz();
+
+function checkQuiz() {
+ let score = 0;
+ let unanswered = [];
+ quizData.forEach((q,i) => {
+  const selected = document.querySelector(`input[name="q${i}"]:checked`);
+  if (!selected) unanswered.push(i+1);
+  else if (Number(selected.value) === q.c) score++;
+ });
+ if (unanswered.length) {
+  alert("Барлық сұраққа жауап беріңіз. Жауап берілмеген сұрақтар: " + unanswered.join(", "));
+  return;
+ }
+ const result = document.getElementById("quizResult");
+ result.style.display = "block";
+ result.innerHTML = `<h3>Сіздің нәтижеңіз: ${score}/${quizData.length}</h3>
+ <p>${score >= 7 ? "Өте жақсы! Әдістемелік білім деңгейіңіз жоғары." :
+ score >= 5 ? "Жақсы нәтиже! Кейбір тақырыптарды қайталаңыз." :
+ "Әдістемелік білімді тереңірек меңгеру қажет."}</p>`;
+ document.getElementById("checkQuiz").disabled = true;
+ document.getElementById("resetQuiz").style.display = "inline-block";
+}
+
+function resetQuiz() {
+ renderQuiz();
+ document.getElementById("quizResult").style.display = "none";
+ document.getElementById("checkQuiz").disabled = false;
+ document.getElementById("resetQuiz").style.display = "none";
+}
+
+const games = [
+ {
+  title:"1-жағдаят. Дәлелдеудегі қиындық",
+  text:"Оқушылар үшбұрыштардың теңдік белгілерін біледі, бірақ есепте қай белгіні қолданатынын анықтай алмайды.",
+  options:[
+   "Дайын шешімді тақтаға жазу",
+   "Белгілі және белгісіз элементтерді салыстыруға арналған бағыттаушы сұрақтар беру",
+   "Есепті үйге беру"
+  ],
+  correct:1,
+  feedback:"Дұрыс! Бағыттаушы сұрақтар оқушының логикалық байланыстарды өздігінен анықтауына көмектеседі."
+ },
+ {
+  title:"2-жағдаят. Кеңістіктік елестету",
+  text:"Оқушылар геометриялық фигураны жазық сызбада түсінуде қиналады. Қандай әрекет тиімді?",
+  options:[
+   "Тек анықтаманы жаттату",
+   "Модель, сызба және цифрлық визуализацияны салыстырып қолдану",
+   "Тақырыпты алып тастау"
+  ],
+  correct:1,
+  feedback:"Дұрыс! Нақты модель мен визуализация кеңістіктік елестетуді дамытуға ықпал етеді."
+ },
+ {
+  title:"3-жағдаят. Оқу жетістігін бағалау",
+  text:"Сабақ соңында оқушылардың теореманы түсіну деңгейін анықтау қажет. Қай шешім орынды?",
+  options:[
+   "Тек өзіндік жұмыстың бағасын қою",
+   "Қысқа дәлелдеу тапсырмасы мен критерийлер арқылы бағалау",
+   "Тек ауызша мадақтау"
+  ],
+  correct:1,
+  feedback:"Дұрыс! Критерийлер оқушының нақты қандай дағдыны меңгергенін анықтауға мүмкіндік береді."
+ },
+ {
+  title:"4-жағдаят. Цифрлық құрал",
+  text:"Оқушы GeoGebra-да фигураны өзгертіп, оның қасиеті сақталатынын байқады. Келесі әдістемелік қадам қандай?",
+  options:[
+   "Бақылауды тоқтату",
+   "Бақылау негізінде гипотеза құрып, оны математикалық дәлелдеу",
+   "Нәтижені дәлелсіз қабылдау"
+  ],
+  correct:1,
+  feedback:"Дұрыс! Цифрлық бақылау математикалық дәлелдеудің орнына жүрмейді, оған негіз болады."
+ }
+];
+
+let gameIndex = 0;
+
+function renderGame() {
+ const g = games[gameIndex];
+ document.getElementById("gameTitle").textContent = g.title;
+ document.getElementById("gameText").textContent = g.text;
+ document.getElementById("gameFeedback").textContent = "";
+ document.getElementById("gameProgress").textContent =
+  `Жағдаят ${gameIndex+1}/${games.length}`;
+
+ const area = document.getElementById("gameOptions");
+ area.innerHTML = "";
+ g.options.forEach((option,i) => {
+  const label = document.createElement("label");
+  label.className = "option";
+  const radio = document.createElement("input");
+  radio.type = "radio";
+  radio.name = "gameAnswer";
+  radio.value = i;
+  label.appendChild(radio);
+  label.append(" " + option);
+  area.appendChild(label);
+ });
+}
+
+function nextGame() {
+ const selected = document.querySelector('input[name="gameAnswer"]:checked');
+ const feedback = document.getElementById("gameFeedback");
+
+ if (!selected) {
+  feedback.textContent = "Алдымен бір жауапты таңдаңыз.";
+  feedback.className = "feedback incorrect";
+  return;
+ }
+
+ const g = games[gameIndex];
+ if (Number(selected.value) === g.correct) {
+  feedback.textContent = g.feedback;
+  feedback.className = "feedback correct";
+ } else {
+  feedback.textContent = "Бұл ең тиімді шешім емес. Жағдаятты қайта талдап көріңіз.";
+  feedback.className = "feedback incorrect";
+  return;
+ }
+
+ if (gameIndex < games.length - 1) {
+  gameIndex++;
+  setTimeout(renderGame, 1200);
+ } else {
+  document.getElementById("gameProgress").textContent =
+   "Барлық жағдаят аяқталды!";
+  document.querySelector("#game button").disabled = true;
+ }
+}
+renderGame();
+
+function checkMatching() {
+ const answers = [
+  document.getElementById("match1").value === "b",
+  document.getElementById("match2").value === "a",
+  document.getElementById("match3").value === "c"
+ ];
+ const score = answers.filter(Boolean).length;
+ const result = document.getElementById("matchResult");
+ result.textContent = `Нәтиже: ${score}/3 дұрыс сәйкестік.`;
+ result.className = "feedback " + (score === 3 ? "correct" : "incorrect");
+}
+
+function saveReflection() {
+ const value = document.getElementById("reflectionText").value.trim();
+ const message = document.getElementById("reflectionMessage");
+ if (!value) {
+  message.textContent = "Алдымен рефлексия жауабын жазыңыз.";
+  return;
+ }
+ message.textContent = "Жауабыңыз осы бетте жазылды. Оны сақтау үшін мәтінді өз құрылғыңызға көшіріп алыңыз.";
+}
+</script>
+
+</body>
+</html>
